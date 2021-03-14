@@ -12,6 +12,7 @@ let searchResultFail = document.querySelector('.searchResultFail');
 let ul = document.querySelector('.ticketCard-area');
 let searchValue = document.querySelector('.searchValue');
 let regionSearch = document.querySelector('.regionSearch');
+
 let searchResult = [];
 let data = [
   {
@@ -62,17 +63,43 @@ submit.addEventListener('click',(e)=>{
         description: ticketDescription.value,
     }
 
+    let checkResult = checkInput();
+    if(checkResult != true){
+      document.getElementById(checkResult).classList.remove('d-none');
+      document.getElementById(checkResult).classList.add('d-block');
+      return false;
+    }
+
     formInit();
     data.push(ticketData);
     getData('全部地區', false);
 })
 
 regionSearch.addEventListener('click', (e)=>{
-    if(searchValue.textContent == '全部地區' || (e.target.value != searchValue.textContent)){
+    let select = regionSearch.value;
+    if(select){
       searchValue.textContent = e.toElement.value;
       getData(e.toElement.value, true);
     }
 })
+
+function checkInput(){
+  let alert = document.querySelectorAll('.alert-message');
+
+  alert.forEach(item => {
+    item.querySelector('p').classList.remove('d-block');
+    item.querySelector('p').classList.add('d-none');
+  })
+
+  return tickName.value == '' ? 'ticketName-message' 
+  : ticketImgUrl.value == '' ? 'ticketImgUrl-message' 
+  : ticketRegion.value == '' ? 'ticketRegion-message'
+  : ticketPrice.value == '' ? 'ticketPrice-message'
+  : ticketNum.value == '' ? 'ticketNum-message'
+  : ticketRate.value == '' ? 'ticketRate-message'
+  : ticketDescription.value == '' ? 'ticketDescription-message'
+  : true
+}
 
 function formInit(){
     tickName.value = '';
@@ -82,7 +109,7 @@ function formInit(){
     ticketNum.value = '';
     ticketRate.value = '';
     ticketDescription.value = '';
-    regionSearch.value = '全部地區'
+    regionSearch.value = '全部地區';
 }
 
 function buildTicketCard(ticketData){

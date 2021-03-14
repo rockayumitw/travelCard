@@ -22908,6 +22908,14 @@ footer li:last-child {
   }
 }
 
+.main-content .ticketCard .ticketCard-description {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 @media (max-width: 1199.98px) {
   .main-content .ticketCard .ticketCard-img {
     height: auto;

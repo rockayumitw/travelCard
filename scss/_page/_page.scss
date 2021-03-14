@@ -19,6 +19,13 @@
         @include media-max(lg) {
             max-width: 100%;
         }
+        .ticketCard-description{
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+        }
         .ticketCard-img {
             @include media-max(lg) {
                 height: auto;
